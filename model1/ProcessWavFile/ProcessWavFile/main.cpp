@@ -16,23 +16,25 @@
 double sampleBuffer[MAX_NUM_CHANNEL][BLOCK_SIZE];
 distortion_state_t my_state;
 
+double* SB_pok;
 
 void processing() 
 {
 	int i;
-	
+	SB_pok = sampleBuffer[0];
 	
 	for (i = 0; i < BLOCK_SIZE; i++)
 	{
-		sampleBuffer[0][i] *= GAIN_MINUS_6DB;                      //L * -6db
-		sampleBuffer[1][i] *= GAIN_MINUS_6DB;					   //R * -6db
+		*SB_pok *= GAIN_MINUS_6DB;										//L * -6db
+		*(SB_pok + BLOCK_SIZE) *= GAIN_MINUS_6DB;					    //R * -6db
 		
-		sampleBuffer[3][i] = sampleBuffer[0][i] * GAIN_MINUS_2DB;  //LS CHANELL
-		sampleBuffer[4][i] = sampleBuffer[1][i] * GAIN_MINUS_1DB;  //RS CHANELL
-		sampleBuffer[2][i] = (sampleBuffer[0][i] + sampleBuffer[1][i]) * GAIN_MINUS_6DB; //C CHANELL
-		sampleBuffer[0][i] = sampleBuffer[2][i] * GAIN_MINUS_3DB; //L CHANELL
-		sampleBuffer[1][i] = sampleBuffer[2][i] * GAIN_MINUS_4DB; //R CHANELL
-		processSingleChannel(sampleBuffer[2], sampleBuffer[5], my_state); //LFE CHANELL
+		*(SB_pok + 3 * BLOCK_SIZE) = *SB_pok * GAIN_MINUS_2DB;  //LS CHANELL
+		*(SB_pok + 4 * BLOCK_SIZE) = *(SB_pok + BLOCK_SIZE) * GAIN_MINUS_1DB;  //RS CHANELL
+		*(SB_pok + 2 * BLOCK_SIZE) = (*SB_pok + *(SB_pok + BLOCK_SIZE)) * GAIN_MINUS_6DB; //C CHANELL
+		*SB_pok = *(SB_pok + 2 * BLOCK_SIZE) * GAIN_MINUS_3DB; //L CHANELL
+		*(SB_pok + BLOCK_SIZE) = *(SB_pok + 2 * BLOCK_SIZE) * GAIN_MINUS_4DB; //R CHANELL
+		processSingleChannel((SB_pok + 2 * BLOCK_SIZE), (SB_pok + 5 * BLOCK_SIZE)); //LFE CHANELL
+		SB_pok++;
 	}
 }
 

@@ -11,19 +11,19 @@ void distortionInit(distortion_state_t* state, int numSamples, clipping_type_t t
 }
 
 // P R O C E S S   B L O C K
-void processSingleChannel(double* input, double* output, distortion_state_t state)
+void processSingleChannel(double* input, double* output)//, distortion_state_t state)
 {
 	// Apply gain
-	for (int i = 0; i < state.numSamples; i++) {
-		output[i] = input[i] * state.gain;
+	for (int i = 0; i < my_state.numSamples; i++) {
+		output[i] = input[i] * my_state.gain;
 	}
 
 	// Apply distortion (sample per sample)
-	switch (state.type) {
+	switch (my_state.type) {
 
 	case FULL_WAVE_RECTIFIER:
 	{
-		for (int sample = 0; sample < state.numSamples; ++sample)
+		for (int sample = 0; sample < my_state.numSamples; ++sample)
 
 		{
 			output[sample] = fabs(output[sample]);
@@ -34,7 +34,7 @@ void processSingleChannel(double* input, double* output, distortion_state_t stat
 
 	case HALF_WAVE_RECTIFIER:
 	{
-		for (int sample = 0; sample < state.numSamples; ++sample)
+		for (int sample = 0; sample < my_state.numSamples; ++sample)
 		{
 			output[sample] = 0.5f * (fabs(output[sample]) + output[sample]);
 		}

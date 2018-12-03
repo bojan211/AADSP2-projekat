@@ -1,4 +1,4 @@
-﻿Build started 3.12.2018 14:27:35.
+﻿Build started 3.12.2018 16:42:54.
      1>Project "D:\ra82-2015\AADSP2\Projekat-RA82\model1\ProcessWavFile\ProcessWavFile\ProcessWavFile.vcxproj" on node 2 (rebuild target(s)).
      1>_PrepareForClean:
          Deleting file "Debug\model1.lastbuildstate".
@@ -11,11 +11,11 @@
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : see declaration of 'fopen'
          distortion2.cpp
          main.cpp
-     1>d:\ra82-2015\aadsp2\projekat-ra82\model1\processwavfile\processwavfile\main.cpp(53): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
      1>d:\ra82-2015\aadsp2\projekat-ra82\model1\processwavfile\processwavfile\main.cpp(55): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>d:\ra82-2015\aadsp2\projekat-ra82\model1\processwavfile\processwavfile\main.cpp(113): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>d:\ra82-2015\aadsp2\projekat-ra82\model1\processwavfile\processwavfile\main.cpp(57): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>d:\ra82-2015\aadsp2\projekat-ra82\model1\processwavfile\processwavfile\main.cpp(115): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
          Generating Code...
        ManifestResourceCompile:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\model1.exe.embed.manifest.res" Debug\model1_manifest.rc 
@@ -41,4 +41,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.40
+Time Elapsed 00:00:01.34
