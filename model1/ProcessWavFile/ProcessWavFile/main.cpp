@@ -1,42 +1,13 @@
-
 #include <stdlib.h>
 #include <string.h>
 #include "WAVheader.h"
 #include "distortion2.h"
-
-#define BLOCK_SIZE 16
-#define MAX_NUM_CHANNEL 8
-
-#define GAIN_MINUS_1DB 0.891251
-#define GAIN_MINUS_2DB 0.794328
-#define GAIN_MINUS_3DB 0.707946
-#define GAIN_MINUS_4DB 0.630957
-#define GAIN_MINUS_6DB 0.501187
+#include "common.h"
+#include "processing.h"
 
 double sampleBuffer[MAX_NUM_CHANNEL][BLOCK_SIZE];
 distortion_state_t my_state;
-
-double* SB_pok;
-
-void processing() 
-{
-	int i;
-	SB_pok = sampleBuffer[0];
-	
-	for (i = 0; i < BLOCK_SIZE; i++)
-	{
-		*SB_pok *= GAIN_MINUS_6DB;										//L * -6db
-		*(SB_pok + BLOCK_SIZE) *= GAIN_MINUS_6DB;					    //R * -6db
-		
-		*(SB_pok + 3 * BLOCK_SIZE) = *SB_pok * GAIN_MINUS_2DB;  //LS CHANELL
-		*(SB_pok + 4 * BLOCK_SIZE) = *(SB_pok + BLOCK_SIZE) * GAIN_MINUS_1DB;  //RS CHANELL
-		*(SB_pok + 2 * BLOCK_SIZE) = (*SB_pok + *(SB_pok + BLOCK_SIZE)) * GAIN_MINUS_6DB; //C CHANELL
-		*SB_pok = *(SB_pok + 2 * BLOCK_SIZE) * GAIN_MINUS_3DB; //L CHANELL
-		*(SB_pok + BLOCK_SIZE) = *(SB_pok + 2 * BLOCK_SIZE) * GAIN_MINUS_4DB; //R CHANELL
-		processSingleChannel((SB_pok + 2 * BLOCK_SIZE), (SB_pok + 5 * BLOCK_SIZE)); //LFE CHANELL
-		SB_pok++;
-	}
-}
+int CURRENT_CH_NUM = 6;
 
 int main(int argc, char* argv[])
 {
@@ -67,7 +38,7 @@ int main(int argc, char* argv[])
 	//-------------------------------------------------	
 	outputWAVhdr = inputWAVhdr;
 	//outputWAVhdr.fmt.NumChannels = inputWAVhdr.fmt.NumChannels; // change number of channels
-	outputWAVhdr.fmt.NumChannels = 6;
+	outputWAVhdr.fmt.NumChannels = CURRENT_CH_NUM;
 
 	int oneChannelSubChunk2Size = inputWAVhdr.data.SubChunk2Size/inputWAVhdr.fmt.NumChannels;
 	int oneChannelByteRate = inputWAVhdr.fmt.ByteRate/inputWAVhdr.fmt.NumChannels;
@@ -105,7 +76,7 @@ int main(int argc, char* argv[])
 				}
 			}
 
-			distortionInit(&my_state, 16, (clipping_type_t)atoi(argv[3]), (float)atof(argv[4]));
+			distortionInit(&my_state, 16, (clipping_type_t)atoi(argv[3]), (float)atof(argv[4])); //Initialize structure for distortion
 			processing();
 
 			for(int j=0; j<BLOCK_SIZE; j++)

@@ -1,4 +1,4 @@
-﻿Build started 3.12.2018 14:24:33.
+﻿Build started 4.12.2018 17:41:16.
      1>Project "D:\ra82-2015\AADSP2\Projekat-RA82\model0\ProcessWavFile\ProcessWavFile\ProcessWavFile.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\model0.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -38,4 +38,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.29
+Time Elapsed 00:00:01.27

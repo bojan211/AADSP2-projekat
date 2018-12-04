@@ -11,12 +11,14 @@ void distortionInit(distortion_state_t* state, int numSamples, clipping_type_t t
 }
 
 // P R O C E S S   B L O C K
-void processSingleChannel(double* input, double* output)//, distortion_state_t state)
+void processSingleChannel(double* input, double* output)
 {
 	// Apply gain
 	for (int i = 0; i < my_state.numSamples; i++) {
-		output[i] = input[i] * my_state.gain;
+		*output++ = (*input++) * my_state.gain;
 	}
+
+	output -= my_state.numSamples;
 
 	// Apply distortion (sample per sample)
 	switch (my_state.type) {
@@ -26,7 +28,8 @@ void processSingleChannel(double* input, double* output)//, distortion_state_t s
 		for (int sample = 0; sample < my_state.numSamples; ++sample)
 
 		{
-			output[sample] = fabs(output[sample]);
+			*output = fabs(*output);
+			output++;
 		}
 
 		break;
@@ -36,7 +39,7 @@ void processSingleChannel(double* input, double* output)//, distortion_state_t s
 	{
 		for (int sample = 0; sample < my_state.numSamples; ++sample)
 		{
-			output[sample] = 0.5f * (fabs(output[sample]) + output[sample]);
+			*output = 0.5f * (fabs(*output) + *output++);
 		}
 		break;
 	}
