@@ -1,0 +1,7 @@
+Running tests for stream: WhiteNoise.wav
+    model 0
+Cannot open file OutStreams//WhiteNoise_model0.wav  0
+    model 1
+Cannot open file OutStreams//WhiteNoise_model1.wav  0
+    model 2
+Cannot open file OutStreams//WhiteNoise_model2.wav  0
