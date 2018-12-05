@@ -1,0 +1,334 @@
+1     	 0000					.extern _my_state
+2     	 0000					.public _distortionInit
+3     	 0000					.public _fabs_foo
+4     	 0000					.public _processSingleChannel
+5     							.code_ovly
+5      >> start of macro: .code_ovly
+1+    									seg_single , "CODE_OVLY", CODE
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_CODE_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "CODE_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_CODE_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .code_ovly
+6     						
+7     						
+8     						
+9     	 0000				_distortionInit:			/* LN: 6 | CYCLE: 0 | RULES: () */ 
+10    	 0000	 BB540007		xmem[i7] = i7			# LN: 6 | 
+11    	 0001	 020F7FFF		i7 += 1			# LN: 6 | 
+12    	 0002	 87750003		i7 = i7 + (0x3)			# LN: 6 | 
+13    	 0003	 91750001		i1 = i7 - (0x1)			# LN: 6 | 
+14    	 0004	 B0540001		xmem[i1] = i0			# LN: 6 | 
+15    	 0005	 90750002		i0 = i7 - (0x2)			# LN: 6 | 
+16    	 0006	 98540000		xmem[i0] = a0h			# LN: 6 | 
+17    	 0007	 90750003		i0 = i7 - (0x3)			# LN: 6 | 
+18    	 0008	 99540000		xmem[i0] = a1h			# LN: 6 | 
+19    	 0009				cline_6_0:			/* LN: 8 | CYCLE: 0 | RULES: () */ 
+20    	 0009	 90750001		i0 = i7 - (0x1)			# LN: 8 | 
+21    	 000A	 88140000		a0 = xmem[i0]			# LN: 8 | 
+22    	 000B	 98090030		AnyReg(i0, a0h)			# LN: 8 | 
+23    	 000C	 884A0010		uhalfword(a0) = (0x10)			# LN: 8 | 
+24    	 000D	 98540000		xmem[i0] = a0h			# LN: 8 | 
+25    	 000E				cline_8_0:			/* LN: 9 | CYCLE: 0 | RULES: () */ 
+26    	 000E	 90750001		i0 = i7 - (0x1)			# LN: 9 | 
+27    	 000F	 B0140000		i0 = xmem[i0]			# LN: 9 | 
+28    	 0010	 91750002		i1 = i7 - (0x2)			# LN: 9 | 
+29    	 0011	 02087FFF		i0 += 1			# LN: 9 | 
+30    	 0012	 88140001		a0 = xmem[i1]			# LN: 9 | 
+31    	 0013	 98540000		xmem[i0] = a0h			# LN: 9 | 
+32    	 0014				cline_9_0:			/* LN: 10 | CYCLE: 0 | RULES: () */ 
+33    	 0014	 90750001		i0 = i7 - (0x1)			# LN: 10 | 
+34    	 0015	 B0140000		i0 = xmem[i0]			# LN: 10 | 
+35    	 0016	 91750003		i1 = i7 - (0x3)			# LN: 10 | 
+36    	 0017	 02287FFF		i0 += 2			# LN: 10 | 
+37    	 0018	 88140001		a0 = xmem[i1]			# LN: 10 | 
+38    	 0019	 98540000		xmem[i0] = a0h			# LN: 10 | 
+39    	 001A				cline_10_0:			/* LN: 11 | CYCLE: 0 | RULES: () */ 
+40    	 001A	 8008001B		jmp (__epilogue_104)			# LN: 11 | 
+41    	 001B				__epilogue_104:			/* LN: 11 | CYCLE: 0 | RULES: () */ 
+42    	 001B	 97750003		i7 = i7 - (0x3)			# LN: 11 | 
+43    	 001C	 02177FFF		i7 -= 1			# LN: 11 | 
+44    	 001D	 81880000		ret			# LN: 11 | 
+45    						
+46    						
+47    						
+48    	 001E				_fabs_foo:			/* LN: 13 | CYCLE: 0 | RULES: () */ 
+49    	 001E	 BB540007		xmem[i7] = i7			# LN: 13 | 
+50    	 001F	 020F7FFF		i7 += 1			# LN: 13 | 
+51    	 0020	 87750001		i7 = i7 + (0x1)			# LN: 13 | 
+52    	 0021	 90750001		i0 = i7 - (0x1)			# LN: 13 | 
+53    	 0022	 98540000		xmem[i0] = a0h			# LN: 13 | 
+54    	 0023				cline_13_0:			/* LN: 15 | CYCLE: 0 | RULES: () */ 
+55    	 0023	 90750001		i0 = i7 - (0x1)			# LN: 15 | 
+56    	 0024	 88140000		a0 = xmem[i0]			# LN: 15 | 
+57    	 0025	 00004E80		a0 & a0			# LN: 15 | 
+58    	 0026	 84C8002B		if (a >= 0) jmp (else_0)			# LN: 15 | 
+59    	 0027				cline_15_0:			/* LN: 17 | CYCLE: 0 | RULES: () */ 
+60    	 0027	 90750001		i0 = i7 - (0x1)			# LN: 17 | 
+61    	 0028	 88140000		a0 = xmem[i0]			# LN: 17 | 
+62    	 0029	 00004C80		a0 =- a0			# LN: 17 | 
+63    	 002A	 8008002E		jmp (__epilogue_106)			# LN: 17 | 
+64    	 002B				cline_17_0:			/* LN: 19 | CYCLE: 0 | RULES: () */ 
+65    	 002B				endif_0:			/* LN: 15 | CYCLE: 0 | RULES: () */ 
+66    	 002B				else_0:			/* LN: 15 | CYCLE: 0 | RULES: () */ 
+67    	 002B	 90750001		i0 = i7 - (0x1)			# LN: 19 | 
+68    	 002C	 88140000		a0 = xmem[i0]			# LN: 19 | 
+69    	 002D	 8008002E		jmp (__epilogue_106)			# LN: 19 | 
+70    	 002E				cline_19_0:			/* LN: 20 | CYCLE: 0 | RULES: () */ 
+71    	 002E				__epilogue_106:			/* LN: 20 | CYCLE: 0 | RULES: () */ 
+72    	 002E	 97750001		i7 = i7 - (0x1)			# LN: 20 | 
+73    	 002F	 02177FFF		i7 -= 1			# LN: 20 | 
+74    	 0030	 81880000		ret			# LN: 20 | 
+75    						
+76    						
+77    						
+78    	 0031				_processSingleChannel:			/* LN: 23 | CYCLE: 0 | RULES: () */ 
+79    	 0031	 BB540007		xmem[i7] = i7			# LN: 23 | 
+80    	 0032	 020F7FFF		i7 += 1			# LN: 23 | 
+81    	 0033	 87750005		i7 = i7 + (0x5)			# LN: 23 | 
+82    	 0034	 94750001		i4 = i7 - (0x1)			# LN: 23 | 
+83    	 0035	 B0540004		xmem[i4] = i0			# LN: 23 | 
+84    	 0036	 90750002		i0 = i7 - (0x2)			# LN: 23 | 
+85    	 0037	 B1540000		xmem[i0] = i1			# LN: 23 | 
+86    	 0038				cline_23_0:			/* LN: 27 | CYCLE: 0 | RULES: () */ 
+87    	 0038	 90750003		i0 = i7 - (0x3)			# LN: 27 | 
+88    	 0039	 00004DC0		a0 = 0			# LN: 27 | 
+89    	 003A	 98540000		xmem[i0] = a0h			# LN: 27 | 
+90    	 003B				for_0:			/* LN: 27 | CYCLE: 0 | RULES: () */ 
+91    	 003B	 88040000		a0 = xmem[_my_state + 0]			# LN: 27 | 
+92    	 003C	 90750003		i0 = i7 - (0x3)			# LN: 27 | 
+93    	 003D	 89140000		a1 = xmem[i0]			# LN: 27 | 
+94    	 003E	 00004F01		a1 - a0			# LN: 27 | 
+95    	 003F	 84C80060		if (a >= 0) jmp (for_end_0)			# LN: 27 | 
+96    	 0040				cline_27_0:			/* LN: 28 | CYCLE: 0 | RULES: () */ 
+97    	 0040	 90750001		i0 = i7 - (0x1)			# LN: 28 | 
+98    	 0041	 B0140000		i0 = xmem[i0]			# LN: 28 | 
+99    	 0042	 80040000		x0 = xmem[_my_state + 2]			# LN: 28 | 
+100   	 0043	 81140000		x1 = xmem[i0]			# LN: 28 | 
+101   	 0044	 90750002		i0 = i7 - (0x2)			# LN: 28 | 
+102   	 0045	 B0140000		i0 = xmem[i0]			# LN: 28 | 
+103   	 0046	 00002020		a0 = x1 * x0			# LN: 28 | 
+104   	 0047	 88540000		xmem[i0] = a0			# LN: 28 | 
+105   	 0048				cline_28_0:			/* LN: 29 | CYCLE: 0 | RULES: () */ 
+106   	 0048	 90750002		i0 = i7 - (0x2)			# LN: 29 | 
+107   	 0049	 B0140000		i0 = xmem[i0]			# LN: 29 | 
+108   	 004A	 91750002		i1 = i7 - (0x2)			# LN: 29 | 
+109   	 004B	 88140000		a0 = xmem[i0]			# LN: 29 | 
+110   	 004C	 B0140001		i0 = xmem[i1]			# LN: 29 | 
+111   	 004D	 00004E00		a0 = a0 << 1			# LN: 29 | 
+112   	 004E	 98540000		xmem[i0] = a0h			# LN: 29 | 
+113   	 004F				cline_29_0:			/* LN: 30 | CYCLE: 0 | RULES: () */ 
+114   	 004F	 90750002		i0 = i7 - (0x2)			# LN: 30 | 
+115   	 0050	 B0140000		i0 = xmem[i0]			# LN: 30 | 
+116   	 0051	 91750002		i1 = i7 - (0x2)			# LN: 30 | 
+117   	 0052	 02087FFF		i0 += 1			# LN: 30 | 
+118   	 0053	 B0540001		xmem[i1] = i0			# LN: 30 | 
+119   	 0054				cline_30_0:			/* LN: 31 | CYCLE: 0 | RULES: () */ 
+120   	 0054	 90750001		i0 = i7 - (0x1)			# LN: 31 | 
+121   	 0055	 B0140000		i0 = xmem[i0]			# LN: 31 | 
+122   	 0056	 91750001		i1 = i7 - (0x1)			# LN: 31 | 
+123   	 0057	 02087FFF		i0 += 1			# LN: 31 | 
+124   	 0058	 B0540001		xmem[i1] = i0			# LN: 31 | 
+125   	 0059				cline_31_0:			/* LN: 27 | CYCLE: 0 | RULES: () */ 
+126   	 0059				init_latch_label_0:			/* LN: 32 | CYCLE: 0 | RULES: () */ 
+127   	 0059	 90750003		i0 = i7 - (0x3)			# LN: 27 | 
+128   	 005A	 88140000		a0 = xmem[i0]			# LN: 27 | 
+129   	 005B	 894A0001		uhalfword(a1) = (0x1)			# LN: 27 | 
+130   	 005C	 00004408		a0 = a0 + a1			# LN: 27 | 
+131   	 005D	 90750003		i0 = i7 - (0x3)			# LN: 27 | 
+132   	 005E	 98540000		xmem[i0] = a0h			# LN: 27 | 
+133   	 005F	 8008003B		jmp (for_0)			# LN: 27 | 
+134   	 0060				cline_27_1:			/* LN: 34 | CYCLE: 0 | RULES: () */ 
+135   	 0060				for_end_0:			/* LN: 27 | CYCLE: 0 | RULES: () */ 
+136   	 0060	 88040000		a0 = xmem[_my_state + 0]			# LN: 34 | 
+137   	 0061	 90750002		i0 = i7 - (0x2)			# LN: 34 | 
+138   	 0062	 89140000		a1 = xmem[i0]			# LN: 34 | 
+139   	 0063	 000044C0		a0 = a1 - a0			# LN: 34 | 
+140   	 0064	 98090030		AnyReg(i0, a0h)			# LN: 34 | 
+141   	 0065	 91750002		i1 = i7 - (0x2)			# LN: 34 | 
+142   	 0066	 B0540001		xmem[i1] = i0			# LN: 34 | 
+143   	 0067				cline_34_0:			/* LN: 37 | CYCLE: 0 | RULES: () */ 
+144   	 0067				switch_0:			/* LN: 37 | CYCLE: 0 | RULES: () */ 
+145   	 0067	 88040000		a0 = xmem[_my_state + 1]			# LN: 37 | 
+146   	 0068	 00004E80		a0 & a0			# LN: 37 | 
+147   	 0069	 8408006E		if (a == 0) jmp (case_0)			# LN: 37 | 
+148   	 006A	 894A0001		uhalfword(a1) = (0x1)			# LN: 37 | 
+149   	 006B	 00004F08		a0 - a1			# LN: 37 | 
+150   	 006C	 8408008B		if (a == 0) jmp (case_1)			# LN: 37 | 
+151   	 006D	 800800AE		jmp (default_0)			# LN: 37 | 
+152   	 006E				cline_37_0:			/* LN: 42 | CYCLE: 0 | RULES: () */ 
+153   	 006E				case_0:			/* LN: 39 | CYCLE: 0 | RULES: () */ 
+154   	 006E	 90750004		i0 = i7 - (0x4)			# LN: 42 | 
+155   	 006F	 00004DC0		a0 = 0			# LN: 42 | 
+156   	 0070	 98540000		xmem[i0] = a0h			# LN: 42 | 
+157   	 0071				for_1:			/* LN: 42 | CYCLE: 0 | RULES: () */ 
+158   	 0071	 88040000		a0 = xmem[_my_state + 0]			# LN: 42 | 
+159   	 0072	 90750004		i0 = i7 - (0x4)			# LN: 42 | 
+160   	 0073	 89140000		a1 = xmem[i0]			# LN: 42 | 
+161   	 0074	 00004F01		a1 - a0			# LN: 42 | 
+162   	 0075	 84C8008A		if (a >= 0) jmp (for_end_1)			# LN: 42 | 
+163   	 0076				cline_42_0:			/* LN: 45 | CYCLE: 0 | RULES: () */ 
+164   	 0076	 90750002		i0 = i7 - (0x2)			# LN: 45 | 
+165   	 0077	 B0140000		i0 = xmem[i0]			# LN: 45 | 
+166   	 0078	 91750002		i1 = i7 - (0x2)			# LN: 45 | 
+167   	 0079	 88140000		a0 = xmem[i0]			# LN: 45 | 
+168   	 007A	 8088001E		call (_fabs_foo)			# LN: 45 | 
+169   	 007B	 B0140001		i0 = xmem[i1]			# LN: 45 | 
+170   	 007C	 00007FFF		nop #empty cycle
+171   	 007D	 98540000		xmem[i0] = a0h			# LN: 45 | 
+172   	 007E				cline_45_0:			/* LN: 46 | CYCLE: 0 | RULES: () */ 
+173   	 007E	 90750002		i0 = i7 - (0x2)			# LN: 46 | 
+174   	 007F	 B0140000		i0 = xmem[i0]			# LN: 46 | 
+175   	 0080	 91750002		i1 = i7 - (0x2)			# LN: 46 | 
+176   	 0081	 02087FFF		i0 += 1			# LN: 46 | 
+177   	 0082	 B0540001		xmem[i1] = i0			# LN: 46 | 
+178   	 0083				cline_46_0:			/* LN: 42 | CYCLE: 0 | RULES: () */ 
+179   	 0083				init_latch_label_1:			/* LN: 47 | CYCLE: 0 | RULES: () */ 
+180   	 0083	 90750004		i0 = i7 - (0x4)			# LN: 42 | 
+181   	 0084	 88140000		a0 = xmem[i0]			# LN: 42 | 
+182   	 0085	 894A0001		uhalfword(a1) = (0x1)			# LN: 42 | 
+183   	 0086	 00004408		a0 = a0 + a1			# LN: 42 | 
+184   	 0087	 90750004		i0 = i7 - (0x4)			# LN: 42 | 
+185   	 0088	 98540000		xmem[i0] = a0h			# LN: 42 | 
+186   	 0089	 80080071		jmp (for_1)			# LN: 42 | 
+187   	 008A				cline_42_1:			/* LN: 49 | CYCLE: 0 | RULES: () */ 
+188   	 008A				for_end_1:			/* LN: 42 | CYCLE: 0 | RULES: () */ 
+189   	 008A	 800800AF		jmp (_355518)			# LN: 49 | 
+190   	 008B				cline_37_1:			/* LN: 55 | CYCLE: 0 | RULES: () */ 
+191   	 008B				case_1:			/* LN: 52 | CYCLE: 0 | RULES: () */ 
+192   	 008B	 90750005		i0 = i7 - (0x5)			# LN: 55 | 
+193   	 008C	 00004DC0		a0 = 0			# LN: 55 | 
+194   	 008D	 98540000		xmem[i0] = a0h			# LN: 55 | 
+195   	 008E				for_2:			/* LN: 55 | CYCLE: 0 | RULES: () */ 
+196   	 008E	 88040000		a0 = xmem[_my_state + 0]			# LN: 55 | 
+197   	 008F	 90750005		i0 = i7 - (0x5)			# LN: 55 | 
+198   	 0090	 89140000		a1 = xmem[i0]			# LN: 55 | 
+199   	 0091	 00004F01		a1 - a0			# LN: 55 | 
+200   	 0092	 84C800AD		if (a >= 0) jmp (for_end_2)			# LN: 55 | 
+201   	 0093				cline_55_0:			/* LN: 57 | CYCLE: 0 | RULES: () */ 
+202   	 0093	 90750002		i0 = i7 - (0x2)			# LN: 57 | 
+203   	 0094	 B0140000		i0 = xmem[i0]			# LN: 57 | 
+204   	 0095	 91750002		i1 = i7 - (0x2)			# LN: 57 | 
+205   	 0096	 88140000		a0 = xmem[i0]			# LN: 57 | 
+206   	 0097	 8088001E		call (_fabs_foo)			# LN: 57 | 
+207   	 0098	 B0140001		i0 = xmem[i1]			# LN: 57 | 
+208   	 0099	 817A4000		x1 = (0x4000)			# LN: 57 | 
+209   	 009A	 89140000		a1 = xmem[i0]			# LN: 57 | 
+210   	 009B	 00004408		a0 = a0 + a1			# LN: 57 | 
+211   	 009C	 00587FFF		x0 = a0h			# LN: 57 | 
+212   	 009D	 90750002		i0 = i7 - (0x2)			# LN: 57 | 
+213   	 009E	 B0140000		i0 = xmem[i0]			# LN: 57 | 
+214   	 009F	 00002020		a0 = x1 * x0			# LN: 57 | 
+215   	 00A0	 88540000		xmem[i0] = a0			# LN: 57 | 
+216   	 00A1				cline_57_0:			/* LN: 58 | CYCLE: 0 | RULES: () */ 
+217   	 00A1	 90750002		i0 = i7 - (0x2)			# LN: 58 | 
+218   	 00A2	 B0140000		i0 = xmem[i0]			# LN: 58 | 
+219   	 00A3	 91750002		i1 = i7 - (0x2)			# LN: 58 | 
+220   	 00A4	 02087FFF		i0 += 1			# LN: 58 | 
+221   	 00A5	 B0540001		xmem[i1] = i0			# LN: 58 | 
+222   	 00A6				cline_58_0:			/* LN: 55 | CYCLE: 0 | RULES: () */ 
+223   	 00A6				init_latch_label_2:			/* LN: 59 | CYCLE: 0 | RULES: () */ 
+224   	 00A6	 90750005		i0 = i7 - (0x5)			# LN: 55 | 
+225   	 00A7	 88140000		a0 = xmem[i0]			# LN: 55 | 
+226   	 00A8	 894A0001		uhalfword(a1) = (0x1)			# LN: 55 | 
+227   	 00A9	 00004408		a0 = a0 + a1			# LN: 55 | 
+228   	 00AA	 90750005		i0 = i7 - (0x5)			# LN: 55 | 
+229   	 00AB	 98540000		xmem[i0] = a0h			# LN: 55 | 
+230   	 00AC	 8008008E		jmp (for_2)			# LN: 55 | 
+231   	 00AD				cline_55_1:			/* LN: 60 | CYCLE: 0 | RULES: () */ 
+232   	 00AD				for_end_2:			/* LN: 55 | CYCLE: 0 | RULES: () */ 
+233   	 00AD	 800800AF		jmp (_355518)			# LN: 60 | 
+234   	 00AE				cline_37_2:			/* LN: 63 | CYCLE: 0 | RULES: () */ 
+235   	 00AE				default_0:			/* LN: 62 | CYCLE: 0 | RULES: () */ 
+236   	 00AE	 800800AF		jmp (switch_end_0)			# LN: 63 | 
+237   	 00AF				cline_63_0:			/* LN: 67 | CYCLE: 0 | RULES: () */ 
+238   	 00AF				_355518:			/* LN: 67 | CYCLE: 0 | RULES: () */ 
+239   	 00AF				switch_end_0:			/* LN: 37 | CYCLE: 0 | RULES: () */ 
+240   	 00AF	 800800B0		jmp (__epilogue_108)			# LN: 67 | 
+241   	 00B0				__epilogue_108:			/* LN: 67 | CYCLE: 0 | RULES: () */ 
+242   	 00B0	 97750005		i7 = i7 - (0x5)			# LN: 67 | 
+243   	 00B1	 02177FFF		i7 -= 1			# LN: 67 | 
+244   	 00B2	 81880000		ret			# LN: 67 | 
+245   						(null)
+				 SYMBOL TABLE 
+
+    Name                                                                                    Type                  Value 
+
+_355518                                                                         			         Relocatable         distortion2_GEN_0000:00AFH
+_COMMON_INC_PATH_                                                               					 Define                 "C:/CirrusDSP/crystal32/common/inc/"
+_DSP_                                                                           					 Define                 "a"
+_LOCAL_INC_PATH_                                                                					 Define                 "inc/"
+_LOCAL_SRC_PATH_                                                                					 Define                 "src/"
+_MUI_VERSION_                                                                   					 Define                 "020000"
+_OVLY_                                                                          					 Define                 "standalone"
+_OVLY_REVISION_                                                                 					 Define                 "020000"
+_ROUTER_INC_PATH_                                                               					 Define                 "rom_inc/"
+_SLOT_                                                                          					 Define                 "0"
+_TARGET_FAMILY_                                                                 					 Define                 "crystal32"
+_TOOLS_VERSION_                                                                 					 Define                 "0x0701"
+_VERSION_                                                                       					 Define                 "00"
+__CASM_VER__                                                                    			  Unused Variable		        0 (701H)
+__epilogue_104                                                                  			         Relocatable         distortion2_GEN_0000:001BH
+__epilogue_106                                                                  			         Relocatable         distortion2_GEN_0000:002EH
+__epilogue_108                                                                  			         Relocatable         distortion2_GEN_0000:00B0H
+_distortionInit                                                                 			  Public Relocatable       distortion2_GEN_0000:0000H
+_fabs_foo                                                                       			  Public Relocatable       distortion2_GEN_0000:001EH
+_my_state                                                                       					 External   
+_processSingleChannel                                                           			  Public Relocatable       distortion2_GEN_0000:0031H
+case_0                                                                          			         Relocatable         distortion2_GEN_0000:006EH
+case_1                                                                          			         Relocatable         distortion2_GEN_0000:008BH
+cline_10_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:001AH
+cline_13_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:0023H
+cline_15_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:0027H
+cline_17_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:002BH
+cline_19_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:002EH
+cline_23_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:0038H
+cline_27_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:0040H
+cline_27_1                                                                      			  Unused Relocatable        distortion2_GEN_0000:0060H
+cline_28_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:0048H
+cline_29_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:004FH
+cline_30_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:0054H
+cline_31_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:0059H
+cline_34_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:0067H
+cline_37_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:006EH
+cline_37_1                                                                      			  Unused Relocatable        distortion2_GEN_0000:008BH
+cline_37_2                                                                      			  Unused Relocatable        distortion2_GEN_0000:00AEH
+cline_42_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:0076H
+cline_42_1                                                                      			  Unused Relocatable        distortion2_GEN_0000:008AH
+cline_45_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:007EH
+cline_46_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:0083H
+cline_55_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:0093H
+cline_55_1                                                                      			  Unused Relocatable        distortion2_GEN_0000:00ADH
+cline_57_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:00A1H
+cline_58_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:00A6H
+cline_63_0                                                                      			  Unused Relocatable        distortion2_GEN_0000:00AFH
+cline_6_0                                                                       			  Unused Relocatable        distortion2_GEN_0000:0009H
+cline_8_0                                                                       			  Unused Relocatable        distortion2_GEN_0000:000EH
+cline_9_0                                                                       			  Unused Relocatable        distortion2_GEN_0000:0014H
+default_0                                                                       			         Relocatable         distortion2_GEN_0000:00AEH
+else_0                                                                          			         Relocatable         distortion2_GEN_0000:002BH
+endif_0                                                                         			  Unused Relocatable        distortion2_GEN_0000:002BH
+for_0                                                                           			         Relocatable         distortion2_GEN_0000:003BH
+for_1                                                                           			         Relocatable         distortion2_GEN_0000:0071H
+for_2                                                                           			         Relocatable         distortion2_GEN_0000:008EH
+for_end_0                                                                       			         Relocatable         distortion2_GEN_0000:0060H
+for_end_1                                                                       			         Relocatable         distortion2_GEN_0000:008AH
+for_end_2                                                                       			         Relocatable         distortion2_GEN_0000:00ADH
+init_latch_label_0                                                              			  Unused Relocatable        distortion2_GEN_0000:0059H
+init_latch_label_1                                                              			  Unused Relocatable        distortion2_GEN_0000:0083H
+init_latch_label_2                                                              			  Unused Relocatable        distortion2_GEN_0000:00A6H
+switch_0                                                                        			  Unused Relocatable        distortion2_GEN_0000:0067H
+switch_end_0                                                                    			         Relocatable         distortion2_GEN_0000:00AFH
+
+	       SEGMENTS:
+
+Size			  Name										 Class
+0000H	 __INIT                                  			 CODE                                    
+00B3H	 distortion2_GEN_0000                    			 CODE_OVLY                               

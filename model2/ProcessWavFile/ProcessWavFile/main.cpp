@@ -63,6 +63,7 @@ int main(DSPint argc, char* argv[])
 		DSPint BytesPerSample = inputWAVhdr.fmt.BitsPerSample/8;
 		const double SAMPLE_SCALE = -(double)(1 << 31);		//2^31
 		DSPint iNumSamples = inputWAVhdr.data.SubChunk2Size/(inputWAVhdr.fmt.NumChannels*inputWAVhdr.fmt.BitsPerSample/8);
+		DSPfract gain_dist;
 		
 		// exact file length should be handled correctly...
 		for(int i=0; i<iNumSamples/BLOCK_SIZE; i++)
@@ -77,8 +78,11 @@ int main(DSPint argc, char* argv[])
 					sampleBuffer[k][j] = sample / SAMPLE_SCALE;				// scale sample to 1.0/-1.0 range		
 				}
 			}
-
-			distortionInit(&my_state, (clipping_type_t)atoi(argv[3]), FRACT_NUM(atof(argv[4]))); //Initialize structure for distortion
+			
+			DSPaccum tmp = atof(argv[4]);
+			tmp >>= 1;
+			gain_dist = DSPfract(tmp);
+			distortionInit(&my_state, (clipping_type_t)atoi(argv[3]), gain_dist); //Initialize structure for distortion
 			processing();
 
 			for(DSPint j=0; j<BLOCK_SIZE; j++)

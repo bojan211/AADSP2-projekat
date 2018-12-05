@@ -26,6 +26,7 @@ void processSingleChannel(DSPfract* input, DSPfract* output)
 	DSPaccum temp_val;
 	for (DSPint i = 0; i < my_state.numSamples; i++) {
 		*output = (*input) * my_state.gain;
+		*output <<= 1;
 		output++;
 		input++;
 	}

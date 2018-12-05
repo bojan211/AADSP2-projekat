@@ -4,7 +4,7 @@ SET CONFIGURATION=..\exe_files
 
 
 : TO DO: Add additional command line args for your program
-SET ADDITIONAL_ARGS=0 1
+SET ADDITIONAL_ARGS=0 1.8
 
 SET COMPARE="..//PCMCompare.exe"
 
