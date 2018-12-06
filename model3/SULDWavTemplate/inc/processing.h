@@ -1,3 +1,3 @@
 #include "common.h"
 
-void processing();
+extern void processing(void);

@@ -1,10 +1,10 @@
 #include "processing.h"
 #include "distortion2.h"
 
-extern DSPfract sampleBuffer[MAX_NUM_CHANNEL][BLOCK_SIZE];
-DSPfract* SB_pok;
+extern __memY DSPfract sampleBuffer[MAX_NUM_CHANNEL][BLOCK_SIZE];
+__memY DSPfract* SB_pok;
 
-void processing() 
+/*void processing()
 {
 	DSPint i;
 	SB_pok = sampleBuffer[0];
@@ -22,4 +22,4 @@ void processing()
 		processSingleChannel((SB_pok + 2 * BLOCK_SIZE), (SB_pok + 5 * BLOCK_SIZE)); //LFE CHANELL
 		SB_pok++;
 	}
-}
+}*/

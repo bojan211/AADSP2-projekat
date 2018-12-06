@@ -7,11 +7,12 @@
 #include "processing.h"
 
 
-DSPfract sampleBuffer[MAX_NUM_CHANNEL][BLOCK_SIZE];
-distortion_state_t my_state;
-DSPint CURRENT_CH_NUM = 6;
-DSPint distorsion_mode = 0;
-//DSPaccum distorsion_gain = 1.8;
+__memY DSPfract sampleBuffer[MAX_NUM_CHANNEL][BLOCK_SIZE];
+__memX distortion_state_t my_state;
+__memX DSPint CURRENT_CH_NUM = 6;
+__memX DSPint distorsion_mode = 0;
+__memX DSPfract distorsion_gain;
+
  
 int main(int argc, char *argv[])
  {
@@ -28,11 +29,7 @@ int main(int argc, char *argv[])
     int i;
     int j;
     DSPaccum tmp;
-    DSPfract distorsion_gain;
 
-	// Init channel buffers
-	//for(i=0; i<MAX_NUM_CHANNEL; i++)
-	//	memset(&sampleBuffer[i],0,BLOCK_SIZE);
 
     for(i=0; i<MAX_NUM_CHANNEL; i++)
     		for( j=0; j<BLOCK_SIZE; j++)
